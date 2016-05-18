@@ -1,6 +1,7 @@
 #include "functional_gen.hpp"
 #include "error.hpp"
 #include "../utility/stacker.hpp"
+#include "../utility/debug.hpp"
 
 using namespace std;
 
@@ -28,9 +29,37 @@ unordered_map<string, primitive_op> generator::m_prim_ops =
      { "max", primitive_op::max },
 };
 
-vector<id_ptr>
-generator::generate(ast::node_ptr ast)
+vector<id_ptr> generator::generate(const vector<module*> modules)
 {
+    vector<id_ptr> ids;
+
+    for (auto mod : modules)
+    {
+        vector<id_ptr> mod_ids = generate(mod);
+
+        for (auto id : mod_ids)
+            m_final_ids.emplace(id->name, id);
+
+        ids.insert(ids.end(), mod_ids.begin(), mod_ids.end());
+    }
+
+    return ids;
+}
+
+vector<id_ptr>
+generator::generate(module * mod)
+{
+    if (verbose<generator>::enabled())
+    {
+        cout << "## Generating functional model for module "
+             << mod->name << " ##" << endl;
+    }
+
+    revertable<module*> current_module(m_current_module, mod);
+    stacker<string,name_stack_t> name_stacker(mod->name, m_name_stack);
+
+    auto ast = mod->ast;
+
     if (ast->type != ast::program)
     {
         throw source_error("Invalid AST root.", ast->location);
@@ -42,16 +71,21 @@ generator::generate(ast::node_ptr ast)
     {
         context_type::scope_holder scope(m_context);
 
-        auto stmt_list = ast->as_list();
-        for (auto & stmt : stmt_list->elements)
+        auto stmts = ast->as_list()->elements[2];
+
+        if (stmts)
         {
-            do_stmt(stmt);
+            for (auto & stmt : stmts->as_list()->elements)
+            {
+                do_stmt(stmt);
+            }
         }
     }
 
     m_func_scope_stack.pop();
 
     vector<id_ptr> ids(func_scope.ids.begin(), func_scope.ids.end());
+
     return ids;
 }
 
@@ -95,6 +129,8 @@ id_ptr generator::do_stmt(ast::node_ptr root)
             }
         }
 
+        stacker<string, name_stack_t> name_stacker(name, m_name_stack);
+
         expr = do_block(block);
     }
 
@@ -105,13 +141,16 @@ id_ptr generator::do_stmt(ast::node_ptr root)
         expr = func;
     }
 
-    auto id = make_shared<identifier>(name, expr, name_node->location);
+    auto id = make_shared<identifier>(qualified_name(name), expr, name_node->location);
 
     try  {
         m_context.bind(name, id);
     } catch (context_error & e) {
         throw source_error(e.what(), name_node->location);
     }
+
+    if (verbose<generator>::enabled())
+        cout << "Storing id " << id->name << endl;
 
     assert(!m_func_scope_stack.empty());
     m_func_scope_stack.top()->ids.push_back(id);
@@ -153,12 +192,36 @@ expr_ptr generator::do_expr(ast::node_ptr root)
     case ast::identifier:
     {
         auto name = root->as_leaf<string>()->value;
+        if (verbose<generator>::enabled())
+            cout << "Looking up name: " << name << endl;
         auto item = m_context.find(name);
         if (!item)
             throw source_error("Undefined name.", root->location);
         auto var = item.value();
         ++var->ref_count;
         return make_shared<reference>(var, root->location);
+    }
+    case ast::qualified_id:
+    {
+        auto & elems = root->as_list()->elements;
+
+        auto module_name = elems[0]->as_leaf<string>()->value;
+        auto module_alias_decl = m_current_module->imports.find(module_name);
+        if(module_alias_decl != m_current_module->imports.end())
+            module_name = module_alias_decl->second->name;
+
+        auto name = elems[1]->as_leaf<string>()->value;
+        auto qname = module_name + '.' + name;
+
+        auto decl = m_final_ids.find(qname);
+        if (verbose<generator>::enabled())
+            cout << "Looking up qualified name: " << qname << endl;
+        if (decl == m_final_ids.end())
+            throw source_error("Undefined name.", root->location);
+
+        auto id = decl->second;
+        ++id->ref_count;
+        return make_shared<reference>(id, root->location);
     }
     case ast::array_self_ref:
     {
@@ -403,6 +466,15 @@ expr_ptr generator::do_func_apply(ast::node_ptr root)
     result->location = root->location;
 
     return result;
+}
+
+string generator::qualified_name(const string & name)
+{
+    ostringstream qname;
+    for (auto & name : m_name_stack)
+        qname << name << '.';
+    qname << name;
+    return qname.str();
 }
 
 }

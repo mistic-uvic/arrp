@@ -95,8 +95,10 @@ result::code compile_module
 {
     module_parser parser;
 
+    module * main_module;
+
     try {
-        parser.parse(source, text);
+        main_module = parser.parse(source, text);
     } catch (stream::parser_error &) {
         return result::syntactic_error;
     } catch (io_error & e) {
@@ -104,15 +106,13 @@ result::code compile_module
         return result::io_error;
     }
 
-    return result::ok;
-
     try
     {
         vector<functional::id_ptr> ids;
 
         {
             functional::generator fgen;
-            //ids = fgen.generate(ast_root);
+            ids = fgen.generate(parser.modules());
         }
 
         if (verbose<functional::model>::enabled())
@@ -125,14 +125,17 @@ result::code compile_module
             }
         }
 
+        //return result::ok;
+
         // FIXME: choice of function to compile
-        auto criteria = [](functional::id_ptr id) -> bool {
-            return id->name == "main";
+        auto criteria = [&main_module](functional::id_ptr id) -> bool {
+            return id->name == main_module->name + ".main";
         };
         auto id_it = std::find_if(ids.begin(), ids.end(), criteria);
         if (id_it == ids.end())
         {
-            throw error("No function named \"main\".");
+            throw error("No function named \"main\" in module \""
+                        + main_module->name + "\".");
         }
         auto id = *id_it;
 
@@ -330,6 +333,7 @@ result::code compile_module
     {
         // FIXME: report error
         //parser.error(e.location, e.what());
+        cout << "ERROR: " << e.what() << endl;
         while(!e.trace.empty())
         {
             auto location = e.trace.top();
@@ -346,6 +350,7 @@ result::code compile_module
     {
         // FIXME: report error
         //parser.error(e.location, e.what());
+        cout << "ERROR: " << e.what() << endl;
         return result::semantic_error;
     }
     /*

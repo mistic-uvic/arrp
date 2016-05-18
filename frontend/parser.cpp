@@ -631,391 +631,397 @@ namespace stream { namespace parsing {
 #line 632 "parser.cpp" // lalr1.cc:847
     break;
 
+  case 8:
+#line 97 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = nullptr; }
+#line 638 "parser.cpp" // lalr1.cc:847
+    break;
+
   case 10:
-#line 103 "parser.y" // lalr1.cc:847
+#line 104 "parser.y" // lalr1.cc:847
     {
   (yylhs.value) = make_list( yylhs.location, { (yystack_[0].value), nullptr } );
   }
-#line 640 "parser.cpp" // lalr1.cc:847
+#line 646 "parser.cpp" // lalr1.cc:847
     break;
 
   case 11:
-#line 108 "parser.y" // lalr1.cc:847
+#line 109 "parser.y" // lalr1.cc:847
     {
   (yylhs.value) = make_list( yylhs.location, { (yystack_[2].value), (yystack_[0].value) } );
   }
-#line 648 "parser.cpp" // lalr1.cc:847
+#line 654 "parser.cpp" // lalr1.cc:847
     break;
 
   case 12:
-#line 115 "parser.y" // lalr1.cc:847
+#line 116 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = make_list( yylhs.location, { (yystack_[0].value) } );
   }
-#line 656 "parser.cpp" // lalr1.cc:847
+#line 662 "parser.cpp" // lalr1.cc:847
     break;
 
   case 13:
-#line 120 "parser.y" // lalr1.cc:847
+#line 121 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = (yystack_[2].value);
     (yylhs.value)->as_list()->append( (yystack_[0].value) );
     (yylhs.value)->location = yylhs.location;
   }
-#line 666 "parser.cpp" // lalr1.cc:847
+#line 672 "parser.cpp" // lalr1.cc:847
     break;
 
   case 14:
-#line 129 "parser.y" // lalr1.cc:847
+#line 130 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = make_list( func_def, yylhs.location, {(yystack_[5].value), (yystack_[3].value), (yystack_[0].value)} );
   }
-#line 674 "parser.cpp" // lalr1.cc:847
+#line 680 "parser.cpp" // lalr1.cc:847
     break;
 
   case 15:
-#line 134 "parser.y" // lalr1.cc:847
+#line 135 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = make_list( func_def, yylhs.location, {(yystack_[2].value), nullptr, (yystack_[0].value)} );
   }
-#line 682 "parser.cpp" // lalr1.cc:847
-    break;
-
-  case 16:
-#line 141 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( yylhs.location, {} ); }
 #line 688 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 17:
-#line 144 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( yylhs.location, {(yystack_[0].value)} ); }
+  case 16:
+#line 142 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( yylhs.location, {} ); }
 #line 694 "parser.cpp" // lalr1.cc:847
     break;
 
+  case 17:
+#line 145 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( yylhs.location, {(yystack_[0].value)} ); }
+#line 700 "parser.cpp" // lalr1.cc:847
+    break;
+
   case 18:
-#line 147 "parser.y" // lalr1.cc:847
+#line 148 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = (yystack_[2].value);
     (yylhs.value)->as_list()->append( (yystack_[0].value) );
     (yylhs.value)->location = yylhs.location;
   }
-#line 704 "parser.cpp" // lalr1.cc:847
+#line 710 "parser.cpp" // lalr1.cc:847
     break;
 
   case 19:
-#line 156 "parser.y" // lalr1.cc:847
+#line 157 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = make_list( yylhs.location, {nullptr, (yystack_[0].value)} );
   }
-#line 712 "parser.cpp" // lalr1.cc:847
+#line 718 "parser.cpp" // lalr1.cc:847
     break;
 
   case 20:
-#line 161 "parser.y" // lalr1.cc:847
+#line 162 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = make_list( yylhs.location, {nullptr, (yystack_[2].value)} );
   }
-#line 720 "parser.cpp" // lalr1.cc:847
+#line 726 "parser.cpp" // lalr1.cc:847
     break;
 
   case 21:
-#line 166 "parser.y" // lalr1.cc:847
+#line 167 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = make_list( yylhs.location, {(yystack_[4].value), (yystack_[2].value)} );
   }
-#line 728 "parser.cpp" // lalr1.cc:847
+#line 734 "parser.cpp" // lalr1.cc:847
     break;
 
   case 23:
-#line 175 "parser.y" // lalr1.cc:847
+#line 176 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = (yystack_[2].value);
     (yylhs.value)->as_list()->append( (yystack_[0].value)->as_list()->elements );
     (yylhs.value)->location = yylhs.location;
   }
-#line 738 "parser.cpp" // lalr1.cc:847
+#line 744 "parser.cpp" // lalr1.cc:847
     break;
 
   case 24:
-#line 184 "parser.y" // lalr1.cc:847
+#line 185 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = make_list( yylhs.location, {(yystack_[0].value)} );
   }
-#line 746 "parser.cpp" // lalr1.cc:847
+#line 752 "parser.cpp" // lalr1.cc:847
     break;
 
   case 25:
-#line 189 "parser.y" // lalr1.cc:847
+#line 190 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = (yystack_[2].value);
     (yylhs.value)->location = yylhs.location;
   }
-#line 755 "parser.cpp" // lalr1.cc:847
-    break;
-
-  case 27:
-#line 199 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( qualified_id, yylhs.location, {(yystack_[2].value), (yystack_[0].value)} ); }
 #line 761 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 37:
-#line 220 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( array_concat, yylhs.location, {(yystack_[2].value), (yystack_[0].value)} ); }
+  case 27:
+#line 200 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( qualified_id, yylhs.location, {(yystack_[2].value), (yystack_[0].value)} ); }
 #line 767 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 38:
-#line 223 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::negate), (yystack_[0].value)} ); }
+  case 37:
+#line 221 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( array_concat, yylhs.location, {(yystack_[2].value), (yystack_[0].value)} ); }
 #line 773 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 39:
-#line 226 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::logic_or), (yystack_[2].value), (yystack_[0].value)} ); }
+  case 38:
+#line 224 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::negate), (yystack_[0].value)} ); }
 #line 779 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 40:
-#line 229 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::logic_and), (yystack_[2].value), (yystack_[0].value)} ); }
+  case 39:
+#line 227 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::logic_or), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 785 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 41:
-#line 232 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::compare_eq), (yystack_[2].value), (yystack_[0].value)} ); }
+  case 40:
+#line 230 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::logic_and), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 791 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 42:
-#line 235 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::compare_neq), (yystack_[2].value), (yystack_[0].value)} ); }
+  case 41:
+#line 233 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::compare_eq), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 797 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 43:
-#line 238 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::compare_l), (yystack_[2].value), (yystack_[0].value)} ); }
+  case 42:
+#line 236 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::compare_neq), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 803 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 44:
-#line 241 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::compare_leq), (yystack_[2].value), (yystack_[0].value)} ); }
+  case 43:
+#line 239 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::compare_l), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 809 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 45:
-#line 244 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::compare_g), (yystack_[2].value), (yystack_[0].value)} ); }
+  case 44:
+#line 242 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::compare_leq), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 815 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 46:
-#line 247 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::compare_geq), (yystack_[2].value), (yystack_[0].value)} ); }
+  case 45:
+#line 245 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::compare_g), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 821 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 47:
-#line 250 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::add), (yystack_[2].value), (yystack_[0].value)} ); }
+  case 46:
+#line 248 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::compare_geq), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 827 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 48:
-#line 253 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::subtract), (yystack_[2].value), (yystack_[0].value)} ); }
+  case 47:
+#line 251 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::add), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 833 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 49:
-#line 256 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::negate), (yystack_[0].value)} ); }
+  case 48:
+#line 254 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::subtract), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 839 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 50:
-#line 259 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::multiply), (yystack_[2].value), (yystack_[0].value)} ); }
+  case 49:
+#line 257 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::negate), (yystack_[0].value)} ); }
 #line 845 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 51:
-#line 262 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::divide), (yystack_[2].value), (yystack_[0].value)} ); }
+  case 50:
+#line 260 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::multiply), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 851 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 52:
-#line 265 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::divide_integer), (yystack_[2].value), (yystack_[0].value)} ); }
+  case 51:
+#line 263 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::divide), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 857 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 53:
-#line 268 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::modulo), (yystack_[2].value), (yystack_[0].value)} ); }
+  case 52:
+#line 266 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::divide_integer), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 863 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 54:
-#line 271 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::raise), (yystack_[2].value), (yystack_[0].value)} ); }
+  case 53:
+#line 269 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::modulo), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 869 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 55:
-#line 274 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = (yystack_[1].value); }
+  case 54:
+#line 272 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[1].location,op_type::raise), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 875 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 56:
-#line 279 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( ast::array_apply, yylhs.location, {(yystack_[3].value), (yystack_[1].value)} ); }
+  case 55:
+#line 275 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = (yystack_[1].value); }
 #line 881 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 57:
-#line 284 "parser.y" // lalr1.cc:847
+  case 56:
+#line 280 "parser.y" // lalr1.cc:847
     { (yylhs.value) = make_list( ast::array_apply, yylhs.location, {(yystack_[3].value), (yystack_[1].value)} ); }
 #line 887 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 58:
-#line 289 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( ast::array_def, yylhs.location, {(yystack_[3].value), (yystack_[1].value)} ); }
+  case 57:
+#line 285 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( ast::array_apply, yylhs.location, {(yystack_[3].value), (yystack_[1].value)} ); }
 #line 893 "parser.cpp" // lalr1.cc:847
     break;
 
+  case 58:
+#line 290 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( ast::array_def, yylhs.location, {(yystack_[3].value), (yystack_[1].value)} ); }
+#line 899 "parser.cpp" // lalr1.cc:847
+    break;
+
   case 59:
-#line 294 "parser.y" // lalr1.cc:847
+#line 295 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = (yystack_[1].value);
     (yylhs.value)->type = ast::array_enum;
     (yylhs.value)->location = yylhs.location;
   }
-#line 903 "parser.cpp" // lalr1.cc:847
-    break;
-
-  case 60:
-#line 303 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( yylhs.location, {(yystack_[0].value)} ); }
 #line 909 "parser.cpp" // lalr1.cc:847
     break;
 
+  case 60:
+#line 304 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( yylhs.location, {(yystack_[0].value)} ); }
+#line 915 "parser.cpp" // lalr1.cc:847
+    break;
+
   case 61:
-#line 306 "parser.y" // lalr1.cc:847
+#line 307 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = (yystack_[2].value);
     (yylhs.value)->as_list()->append( (yystack_[0].value) );
     (yylhs.value)->location = yylhs.location;
   }
-#line 919 "parser.cpp" // lalr1.cc:847
-    break;
-
-  case 64:
-#line 321 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( array_params, yylhs.location, {(yystack_[0].value)} ); }
 #line 925 "parser.cpp" // lalr1.cc:847
     break;
 
+  case 64:
+#line 322 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( array_params, yylhs.location, {(yystack_[0].value)} ); }
+#line 931 "parser.cpp" // lalr1.cc:847
+    break;
+
   case 65:
-#line 324 "parser.y" // lalr1.cc:847
+#line 325 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = (yystack_[2].value);
     (yylhs.value)->as_list()->append( (yystack_[0].value) );
   }
-#line 934 "parser.cpp" // lalr1.cc:847
-    break;
-
-  case 66:
-#line 332 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( array_param, yylhs.location, {(yystack_[0].value), nullptr} ); }
 #line 940 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 67:
-#line 335 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( array_param, yylhs.location, {(yystack_[2].value), (yystack_[0].value)} ); }
+  case 66:
+#line 333 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( array_param, yylhs.location, {(yystack_[0].value), nullptr} ); }
 #line 946 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 68:
-#line 340 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( array_size, yylhs.location, { (yystack_[0].value), nullptr } ); }
+  case 67:
+#line 336 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( array_param, yylhs.location, {(yystack_[2].value), (yystack_[0].value)} ); }
 #line 952 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 69:
-#line 343 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( array_size, yylhs.location, { (yystack_[2].value), (yystack_[0].value) } ); }
+  case 68:
+#line 341 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( array_size, yylhs.location, { (yystack_[0].value), nullptr } ); }
 #line 958 "parser.cpp" // lalr1.cc:847
     break;
 
+  case 69:
+#line 344 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( array_size, yylhs.location, { (yystack_[2].value), (yystack_[0].value) } ); }
+#line 964 "parser.cpp" // lalr1.cc:847
+    break;
+
   case 70:
-#line 348 "parser.y" // lalr1.cc:847
+#line 349 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = make_list( ast::func_apply, yylhs.location, {(yystack_[3].value), (yystack_[1].value)} );
   }
-#line 966 "parser.cpp" // lalr1.cc:847
-    break;
-
-  case 71:
-#line 355 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( yylhs.location, {(yystack_[0].value)} ); }
 #line 972 "parser.cpp" // lalr1.cc:847
     break;
 
+  case 71:
+#line 356 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( yylhs.location, {(yystack_[0].value)} ); }
+#line 978 "parser.cpp" // lalr1.cc:847
+    break;
+
   case 72:
-#line 358 "parser.y" // lalr1.cc:847
+#line 359 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = (yystack_[2].value);
     (yylhs.value)->as_list()->append( (yystack_[0].value) );
   }
-#line 981 "parser.cpp" // lalr1.cc:847
-    break;
-
-  case 73:
-#line 366 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[5].location,op_type::conditional), (yystack_[4].value), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 987 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 74:
-#line 371 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( ast::case_expr, yylhs.location, { (yystack_[4].value), (yystack_[0].value) } ); }
+  case 73:
+#line 367 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( primitive, yylhs.location, {make_const(yystack_[5].location,op_type::conditional), (yystack_[4].value), (yystack_[2].value), (yystack_[0].value)} ); }
 #line 993 "parser.cpp" // lalr1.cc:847
     break;
 
-  case 75:
-#line 376 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( yylhs.location, {(yystack_[0].value)} ); }
+  case 74:
+#line 372 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( ast::case_expr, yylhs.location, { (yystack_[4].value), (yystack_[0].value) } ); }
 #line 999 "parser.cpp" // lalr1.cc:847
     break;
 
+  case 75:
+#line 377 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( yylhs.location, {(yystack_[0].value)} ); }
+#line 1005 "parser.cpp" // lalr1.cc:847
+    break;
+
   case 76:
-#line 379 "parser.y" // lalr1.cc:847
+#line 380 "parser.y" // lalr1.cc:847
     {
     (yylhs.value) = (yystack_[2].value);
     (yylhs.value)->location = yylhs.location;
     (yylhs.value)->as_list()->append( (yystack_[0].value) );
   }
-#line 1009 "parser.cpp" // lalr1.cc:847
-    break;
-
-  case 77:
-#line 388 "parser.y" // lalr1.cc:847
-    { (yylhs.value) = make_list( yylhs.location, { (yystack_[2].value), (yystack_[0].value) } ); }
 #line 1015 "parser.cpp" // lalr1.cc:847
     break;
 
+  case 77:
+#line 389 "parser.y" // lalr1.cc:847
+    { (yylhs.value) = make_list( yylhs.location, { (yystack_[2].value), (yystack_[0].value) } ); }
+#line 1021 "parser.cpp" // lalr1.cc:847
+    break;
 
-#line 1019 "parser.cpp" // lalr1.cc:847
+
+#line 1025 "parser.cpp" // lalr1.cc:847
             default:
               break;
             }
@@ -1507,15 +1513,15 @@ namespace stream { namespace parsing {
   const unsigned short int
   parser::yyrline_[] =
   {
-       0,    63,    63,    71,    76,    78,    82,    87,    95,    98,
-     102,   107,   114,   119,   128,   133,   141,   143,   146,   155,
-     160,   165,   172,   174,   183,   188,   196,   198,   201,   203,
-     205,   207,   209,   211,   213,   215,   217,   219,   222,   225,
-     228,   231,   234,   237,   240,   243,   246,   249,   252,   255,
-     258,   261,   264,   267,   270,   273,   278,   283,   288,   293,
-     302,   305,   314,   316,   320,   323,   331,   334,   339,   342,
-     347,   354,   357,   365,   370,   375,   378,   387,   392,   394,
-     397,   400,   404,   406,   409,   412,   412
+       0,    63,    63,    71,    76,    78,    82,    87,    97,    99,
+     103,   108,   115,   120,   129,   134,   142,   144,   147,   156,
+     161,   166,   173,   175,   184,   189,   197,   199,   202,   204,
+     206,   208,   210,   212,   214,   216,   218,   220,   223,   226,
+     229,   232,   235,   238,   241,   244,   247,   250,   253,   256,
+     259,   262,   265,   268,   271,   274,   279,   284,   289,   294,
+     303,   306,   315,   317,   321,   324,   332,   335,   340,   343,
+     348,   355,   358,   366,   371,   376,   379,   388,   393,   395,
+     398,   401,   405,   407,   410,   413,   413
   };
 
   // Print the state stack on the debug stream.
@@ -1599,8 +1605,8 @@ namespace stream { namespace parsing {
 
 #line 13 "parser.y" // lalr1.cc:1155
 } } // stream::parsing
-#line 1603 "parser.cpp" // lalr1.cc:1155
-#line 415 "parser.y" // lalr1.cc:1156
+#line 1609 "parser.cpp" // lalr1.cc:1155
+#line 416 "parser.y" // lalr1.cc:1156
 
 
 void

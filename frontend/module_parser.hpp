@@ -26,7 +26,7 @@ class module_parser
 public:
     void set_import_dirs(const vector<string> & dirs) { m_import_dirs = dirs; }
 
-    void parse(const module_source &, istream & text);
+    module * parse(const module_source &, istream & text);
 
     vector<module*> modules() const
     {

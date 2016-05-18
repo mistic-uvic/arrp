@@ -94,6 +94,7 @@ import_list:
 
 statements:
   // empty
+  { $$ = nullptr; }
   |
   stmt_list optional_semicolon
 ;

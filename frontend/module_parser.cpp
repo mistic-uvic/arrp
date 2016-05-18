@@ -10,7 +10,7 @@ using namespace std;
 
 namespace stream {
 
-void module_parser::parse(const module_source & source, istream & text)
+module * module_parser::parse(const module_source & source, istream & text)
 {
     if (verbose<module_parser>::enabled())
         cout << "Parsing " << source.path << endl;
@@ -49,7 +49,8 @@ void module_parser::parse(const module_source & source, istream & text)
     {
         for (auto & import_node : imports_node->as_list()->elements)
         {
-            imported_mods.insert(parse_import(source, import_node));
+            auto import_decl = parse_import(source, import_node);
+            imported_mods.insert(import_decl);
         }
     }
 
@@ -64,6 +65,8 @@ void module_parser::parse(const module_source & source, istream & text)
 
     if (verbose<module_parser>::enabled())
         cout << "Done parsing " << source.path << endl;
+
+    return mod;
 }
 
 pair<string, module*> module_parser::parse_import

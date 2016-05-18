@@ -22,9 +22,11 @@ along with this program; if not, write to the Free Software Foundation, Inc.,
 #define STREAM_FUNCTIONAL_MODEL_GENERATOR_INCLUDED
 
 #include "../common/ast.hpp"
+#include "../common/module.hpp"
 #include "../common/primitives.hpp"
 #include "../common/functional_model.hpp"
 #include "../utility/context.hpp"
+#include "../utility/stacker.hpp"
 
 #include <stack>
 #include <unordered_map>
@@ -40,7 +42,8 @@ using std::unordered_map;
 class generator
 {
 public:
-    vector<id_ptr> generate(ast::node_ptr ast);
+    vector<id_ptr> generate(const vector<module*> modules);
+    vector<id_ptr> generate(module*);
 
 private:
     using context_type = context<string,var_ptr>;
@@ -58,9 +61,18 @@ private:
     expr_ptr do_array_concat(ast::node_ptr);
     expr_ptr do_func_apply(ast::node_ptr);
 
+    string qualified_name(const string & name);
+
+    static unordered_map<string, primitive_op> m_prim_ops;
+
+    unordered_map<string, id_ptr> m_final_ids;
+
+    module * m_current_module = nullptr;
+
     stack<array_ptr> m_array_stack;
     stack<scope*> m_func_scope_stack;
-    static unordered_map<string, primitive_op> m_prim_ops;
+    typedef stack_adapter<deque<string>> name_stack_t;
+    name_stack_t m_name_stack;
 };
 
 }
