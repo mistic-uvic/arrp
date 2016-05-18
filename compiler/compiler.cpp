@@ -125,8 +125,6 @@ result::code compile_module
             }
         }
 
-        //return result::ok;
-
         // FIXME: choice of function to compile
         auto criteria = [&main_module](functional::id_ptr id) -> bool {
             return id->name == main_module->name + ".main";
@@ -331,26 +329,20 @@ result::code compile_module
     }
     catch (functional::func_reduce_error & e)
     {
-        // FIXME: report error
-        //parser.error(e.location, e.what());
-        cout << "ERROR: " << e.what() << endl;
+        cerr << "** ERROR " << e.location << ": " << e.what() << endl;
+        print_code_range(cerr, e.location.path(), e.location.range);
         while(!e.trace.empty())
         {
             auto location = e.trace.top();
             e.trace.pop();
-            cout << ".. from " << '['
-                 << location.begin.line << ':' << location.begin.column
-                 << "-"
-                 << location.end.line << ':' << location.end.column
-                 << ']' << endl;
+            cout << ".. from " << location << endl;
         }
         return result::semantic_error;
     }
     catch (source_error & e)
     {
-        // FIXME: report error
-        //parser.error(e.location, e.what());
-        cout << "ERROR: " << e.what() << endl;
+        cerr << "** ERROR " << e.location << ": " << e.what() << endl;
+        print_code_range(cerr, e.location.path(), e.location.range);
         return result::semantic_error;
     }
     /*

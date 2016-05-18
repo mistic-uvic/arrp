@@ -37,10 +37,30 @@ module * module_parser::parse(const module_source & source, istream & text)
     }
 
     auto & elems = ast->as_list()->elements;
-    string mod_name = elems[0]->as_leaf<string>()->value;
+
+    string mod_name;
+    if (elems[0])
+        mod_name = elems[0]->as_leaf<string>()->value;
+    else
+        mod_name = "main";
+
+#if 0
+    if (m_named_modules.find(mod_name) != m_named_modules.end())
+    {
+        ostringstream msg;
+        msg << "Module " << mod_name << " is already imported.";
+        throw io_error(msg.str());
+    }
+#endif
 
     if (verbose<module_parser>::enabled())
         cout << "Module name = " << mod_name << endl;
+
+    auto mod = new module;
+    mod->source = source;
+    mod->name = mod_name;
+    mod->ast = ast;
+    m_named_modules.emplace(mod_name, mod);
 
     unordered_map<string, module*> imported_mods;
 
@@ -54,14 +74,9 @@ module * module_parser::parse(const module_source & source, istream & text)
         }
     }
 
-    auto mod = new module;
-    mod->source = source;
-    mod->name = mod_name;
-    mod->ast = ast;
     mod->imports = imported_mods;
 
     m_ordered_modules.push_back(mod);
-    m_named_modules.emplace(mod_name, mod);
 
     if (verbose<module_parser>::enabled())
         cout << "Done parsing " << source.path << endl;
@@ -113,7 +128,7 @@ pair<string, module*> module_parser::parse_import
         if (!text.is_open())
         {
             ostringstream msg;
-            msg << "** ERROR [" << source.path << "]" << ": "
+            msg << "** ERROR in " << source.path << ": "
                 << "Can not find imported module " << import_name << "."
                 << endl;
             throw io_error(msg.str());
@@ -131,7 +146,7 @@ pair<string, module*> module_parser::parse_import
     if (imported_mod_it == m_named_modules.end())
     {
         ostringstream msg;
-        msg << "** ERROR [" << source.path << "]" << ": "
+        msg << "** ERROR in " << source.path << ": "
             << "Failed to import module " << import_name << "."
             << endl;
         throw io_error(msg.str());

@@ -27,6 +27,7 @@ along with this program; if not, write to the Free Software Foundation, Inc.,
 #include "../common/functional_model.hpp"
 #include "../utility/context.hpp"
 #include "../utility/stacker.hpp"
+#include "error.hpp"
 
 #include <stack>
 #include <unordered_map>
@@ -62,6 +63,19 @@ private:
     expr_ptr do_func_apply(ast::node_ptr);
 
     string qualified_name(const string & name);
+
+    code_location location_in_module(const parsing::location & ploc)
+    {
+        code_location cloc;
+        cloc.module = m_current_module;
+        cloc.range.start.line = ploc.begin.line;
+        cloc.range.start.column = ploc.begin.column;
+        cloc.range.end.line = ploc.end.line;
+        cloc.range.end.column = ploc.end.column;
+        return cloc;
+    }
+
+    source_error module_error(const string & what, const parsing::location & loc);
 
     static unordered_map<string, primitive_op> m_prim_ops;
 

@@ -68,7 +68,11 @@ program:
 ;
 
 module_decl:
-  MODULE id ';' { $$ = $2; }
+  // empty
+  { $$ = nullptr; }
+  |
+  MODULE id ';'
+  { $$ = $2; }
 ;
 
 imports:

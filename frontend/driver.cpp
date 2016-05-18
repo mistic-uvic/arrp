@@ -1,6 +1,8 @@
 #include "driver.hpp"
 #include "../common/module.hpp"
 
+using namespace std;
+
 namespace stream {
 namespace parsing {
 
@@ -12,7 +14,9 @@ void driver::error(const parser::location_type& loc, const std::string& m)
     range.end.line = loc.end.line;
     range.end.column = loc.end.column;
 
-    print_error(m_path, range, m);
+    cerr << "** ERROR at " << m_path << ":" << range.start << ": "
+         << m << endl;
+    print_code_range(cerr, m_path, range);
 }
 
 }

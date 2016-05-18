@@ -44,13 +44,25 @@ struct code_location
 {
     stream::module * module = nullptr;
     code_range range;
+
+    string path()
+    {
+        if (module)
+            return module->source.path;
+        else
+            return string();
+    }
 };
 
 struct parser_error : error {};
 
 struct io_error : error { using error::error; };
 
-void print_error(const string & path, const code_range &, const string & msg);
+void print_code_range(ostream &, const string & path, const code_range &);
+
+ostream & operator<< (ostream & s, const code_point & p);
+ostream & operator<< (ostream & s, const code_range & r);
+ostream & operator<< (ostream & s, const code_location & l);
 
 }
 
