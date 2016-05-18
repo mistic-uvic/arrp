@@ -16,6 +16,8 @@ add_library(streamc-lib ${lib_mode}
   ../common/func_types.cpp
   ../common/func_model_printer.cpp
   ../common/ph_model.cpp
+  ../common/module.cpp
+  ../frontend/module_parser.cpp
   ../frontend/prim_reduction.cpp
   ../frontend/functional_gen.cpp
   ../frontend/func_copy.cpp

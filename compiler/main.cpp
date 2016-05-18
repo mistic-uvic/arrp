@@ -22,6 +22,7 @@ along with this program; if not, write to the Free Software Foundation, Inc.,
 #include "compiler.hpp"
 #include "../common/ast.hpp"
 #include "../common/functional_model.hpp"
+#include "../frontend/module_parser.hpp"
 #include "../frontend/func_reducer.hpp"
 #include "../frontend/array_reduction.hpp"
 #include "../frontend/array_transpose.hpp"
@@ -83,6 +84,7 @@ int main(int argc, char *argv[])
 {
     arguments args(argc-1, argv+1);
 
+    args.add_verbose_topic<module_parser>("parsing");
     args.add_verbose_topic<ast::output>("ast");
     args.add_verbose_topic<functional::model>("func-model");
     args.add_verbose_topic<functional::type_checker>("type-check");

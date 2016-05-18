@@ -20,6 +20,7 @@ along with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "arg_parser.hpp"
 #include "compiler.hpp"
+#include "../frontend/module_parser.hpp"
 #include "../common/ast_printer.hpp"
 //#include "../common/polyhedral_model_printer.hpp"
 #include "../common/func_model_printer.hpp"
@@ -63,37 +64,47 @@ result::code compile(const arguments & args)
         return result::command_line_error;
     }
 
-    ifstream input_file(args.input_filename);
-    if (!input_file.is_open())
+    ifstream source_file(args.input_filename);
+    if (!source_file.is_open())
     {
         cerr << "streamc: error: Failed to open input file: '"
              << args.input_filename << "'." << endl;
         return result::io_error;
     }
 
-    return compile_source(input_file, args);
+    string input_dir;
+    {
+        string::size_type last_sep_pos = args.input_filename.rfind('/');
+        if(last_sep_pos == string::npos)
+            last_sep_pos = args.input_filename.rfind('\\');
+        if (last_sep_pos == string::npos)
+            last_sep_pos = 0;
+
+        input_dir = args.input_filename.substr(0, last_sep_pos);
+    }
+
+    module_source source;
+    source.dir = input_dir;
+    source.path = args.input_filename;
+
+    return compile_module(source, source_file, args);
 }
 
-result::code compile_source(istream & source, const arguments & args)
+result::code compile_module
+(const module_source & source, istream & text, const arguments & args)
 {
-    stream::parsing::driver parser(source, cout);
+    module_parser parser;
 
-    int parser_error = parser.parse();
-    if (parser_error)
+    try {
+        parser.parse(source, text);
+    } catch (stream::parser_error &) {
         return result::syntactic_error;
-
-    auto ast_root = parser.ast();
-    if (!ast_root)
-        return result::ok;
-
-    if (verbose<ast::output>::enabled())
-    {
-        cout << endl;
-        cout << "== Abstract Syntax Tree ==" << endl;
-        stream::ast::printer printer;
-        printer.print(ast_root.get());
-        cout << endl;
+    } catch (io_error & e) {
+        cerr << e.what() << endl;
+        return result::io_error;
     }
+
+    return result::ok;
 
     try
     {
@@ -101,7 +112,7 @@ result::code compile_source(istream & source, const arguments & args)
 
         {
             functional::generator fgen;
-            ids = fgen.generate(ast_root);
+            //ids = fgen.generate(ast_root);
         }
 
         if (verbose<functional::model>::enabled())
@@ -317,7 +328,8 @@ result::code compile_source(istream & source, const arguments & args)
     }
     catch (functional::func_reduce_error & e)
     {
-        parser.error(e.location, e.what());
+        // FIXME: report error
+        //parser.error(e.location, e.what());
         while(!e.trace.empty())
         {
             auto location = e.trace.top();
@@ -332,7 +344,8 @@ result::code compile_source(istream & source, const arguments & args)
     }
     catch (source_error & e)
     {
-        parser.error(e.location, e.what());
+        // FIXME: report error
+        //parser.error(e.location, e.what());
         return result::semantic_error;
     }
     /*
