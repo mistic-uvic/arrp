@@ -42,7 +42,7 @@ module * module_parser::parse(const module_source & source, istream & text)
     if (elems[0])
         mod_name = elems[0]->as_leaf<string>()->value;
     else
-        mod_name = "main";
+        mod_name = "m";
 
 #if 0
     if (m_named_modules.find(mod_name) != m_named_modules.end())
