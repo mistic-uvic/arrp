@@ -139,7 +139,7 @@ result::code compile_module
 
         unordered_set<functional::id_ptr> array_ids;
 
-        functional::name_provider func_name_provider('.');
+        functional::name_provider func_name_provider(':');
 
         {
             functional::func_reducer reducer(func_name_provider);
@@ -204,6 +204,7 @@ result::code compile_module
             }
         }
 
+#if 0
         {
             // Rename ids for C++ compatibility
 
@@ -233,7 +234,7 @@ result::code compile_module
                 id->name = unique_name;
             }
         }
-
+#endif
         {
             // Create polyhedral model
 

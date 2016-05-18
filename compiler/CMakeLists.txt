@@ -34,6 +34,7 @@ add_library(streamc-lib ${lib_mode}
   ../cpp/cpp_target.cpp
   ../cpp/cpp_from_polyhedral.cpp
   ../cpp/cpp_from_isl.cpp
+  ../cpp/name_mapper.cpp
   compiler.cpp
 )
 
