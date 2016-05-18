@@ -319,7 +319,7 @@ expression_ptr cpp_from_polyhedral::generate_buffer_access
     index_type buffer_index = index;
     string array_name = m_name_mapper(array->name);
 
-    cpp_gen::buffer & buffer_info = m_buffers[array_name];
+    cpp_gen::buffer & buffer_info = m_buffers[array->name];
 
     expression_ptr buffer = make_shared<id_expression>(array_name);
 
